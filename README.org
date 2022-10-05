@@ -1,0 +1,5 @@
+* Ansible Presentation
+
+A simple quick tutorial on the basics of Ansible.
+
+Written in [[https://github.com/yjwen/org-reveal][org-reveal]].

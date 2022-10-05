@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Ansible Primer</title>
+<meta name="author" content="Matei-Alexandru Gardus"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="/Users/ghost/.emacs.d/.local/straight/build-28.2/revealjs/dist/reveal.css"/>
+
+<link rel="stylesheet" href="/Users/ghost/.emacs.d/.local/straight/build-28.2/revealjs/dist/theme/black.css" id="theme"/>
+<link rel="stylesheet" href="atom-one-dark.css"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Ansible Primer</h1><h2 class="author">Matei-Alexandru Gardus</h2>
+</section>
+
+<section>
+<section id="slide-org1a4403d">
+<h2 id="org1a4403d">Welcome!</h2>
+<p>
+Get a cup of coffee. ☕
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org081826d">
+<h2 id="org081826d">TL;DR for today</h2>
+<p>
+Quick demo of what Ansible does.
+</p>
+
+<p>
+Why use it?
+</p>
+
+<p>
+Why it&rsquo;s super cool.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb498012">
+<h2 id="orgb498012">What is Ansible?</h2>
+<p>
+Configuration management tool.
+</p>
+
+<p>
+Automated control of server state.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org82c3f33">
+<h2 id="org82c3f33">Why?</h2>
+<p>
+First we need to look at how applications are deployed in general.
+</p>
+
+</section>
+<section id="slide-org51fe4f0">
+<h3 id="org51fe4f0">The Basics</h3>
+<p class="fragment (appear)">
+There are different processes, but generally, applications are deployed via:
+</p>
+
+<ul>
+<li class="fragment appear">Package Managers (<code>apt</code>)</li>
+<li class="fragment appear">Source tarballs (uses <code>./configure; make; ...</code>)</li>
+<li class="fragment appear">Single binaries</li>
+
+</ul>
+
+<p class="fragment (appear)">
+Either way, all these need to be run in shells, essentially.
+</p>
+
+</section>
+<section id="slide-org9cc33e0">
+<h3 id="org9cc33e0">Shell Scripts</h3>
+<p class="fragment (appear)">
+These are the <i>easiest</i> (?) way to automate a server&rsquo;s configuration.
+</p>
+
+<p class="fragment (appear)">
+Just rewrite the commands you ran when you first manually installed a software.
+</p>
+
+<p class="fragment (appear)">
+Some software provides these out-of-the-box.
+</p>
+
+</section>
+<section id="slide-orge12865e">
+<h3 id="orge12865e">Is this good?</h3>
+<p class="fragment (appear)">
+Not really.
+</p>
+
+<ul>
+<li class="fragment appear">Scripts are hard to write.</li>
+<li class="fragment appear">They&rsquo;re imperative.</li>
+<li class="fragment appear">They&rsquo;re not idempotent (by default)</li>
+<li class="fragment appear">Not easily compoundable.</li>
+
+</ul>
+
+</section>
+<section id="slide-orgb611a6a">
+<h3 id="orgb611a6a">Doesn&rsquo;t mean they&rsquo;re bad.</h3>
+<p>
+We just want to have an easier method to manage small snippets we can run to
+deploy software.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org5176db8">
+<h2 id="org5176db8">Ansible solves this!</h2>
+<p>
+Made by Red Hat.
+</p>
+
+<p>
+Designed to be a sequence of small shell scripts run on the server, provided
+as Ansible <b>modules</b>.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org692de23">
+<h2 id="org692de23">How does Ansible work?</h2>
+<p>
+Essentially, Ansible takes our input (YAML files) and constructs a set of tasks
+to run.
+</p>
+
+<p>
+This set of tasks is run on any nodes we want it to in order, and
+<b>declaratively</b> sets up our nodes.
+</p>
+
+<p>
+Nothing is run if everything is fine.
+</p>
+
+</section>
+<section id="slide-org22981d1">
+<h3 id="org22981d1">Ansible Structure</h3>
+<p>
+<i>&ldquo;We love Shakespare.&rdquo;</i> - Red Hat, probably.
+</p>
+
+<ul>
+<li class="fragment appear"><b>Role:</b> Set of reusable Ansible files creating a particular configuration</li>
+<li class="fragment appear"><b>Playbook:</b> a composition of plays to properly configure an deployment</li>
+<li class="fragment appear"><b>Play:</b> a mapping between hosts and roles</li>
+<li class="fragment appear"><b>Inventory:</b> set of hosts to configure (doesn&rsquo;t fit, I guess?)</li>
+
+</ul>
+
+</section>
+<section id="slide-org62b3722">
+<h3 id="org62b3722">General Workflow</h3>
+<ul>
+<li class="fragment appear">Pass in a YAML file (or folder of them) containing plays, roles, etc.</li>
+<li class="fragment appear">Set a inventory file to point to the servers you want to configure</li>
+<li class="fragment appear"><code>ansible-playbook -i inventory.file playbook.yml</code></li>
+
+</ul>
+
+</section>
+<section id="slide-org06ef692">
+<h3 id="org06ef692">Terraform!</h3>
+<ul>
+<li class="fragment appear">Terraform by HashiCorp is basically Ansible&rsquo;s best friend.</li>
+<li class="fragment appear">Both declarative!</li>
+<li class="fragment appear">Terraform provisions infrastructure hardware, Ansible deals with software.</li>
+<li class="fragment appear">Terraform works with cloud or bare-metal (with some effort).</li>
+<li class="fragment appear">Cool thing we&rsquo;re not gonna use, but nice to have fun with.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org2d8dca8">
+<h2 id="org2d8dca8">How can we use this?</h2>
+<ul>
+<li class="fragment appear">Take all of our dependencies on our nodes</li>
+<li class="fragment appear">List roles that represent each software we need on each machine
+<ul>
+<li>Or find them online 😉</li>
+
+</ul></li>
+<li class="fragment appear">Setup playbook for all our hosts</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orge5adb40">
+<h2 id="orge5adb40">Examples!</h2>
+<p>
+I&rsquo;ll show you a simple example of an Ansible playbook that installs Slurm on
+Ubuntu 20.04.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd0ac2e7">
+<h2 id="orgd0ac2e7">Example Ansible Playbook</h2>
+<div class="org-src-container">
+
+<pre><code class="yaml" data-line-numbers='1-3|5|6-9|10-14|15-19'>- name: Setup Slurm nodes
+  hosts: slurm-nodes
+  remote_user: root
+
+  tasks:
+  - name: Ensure Slurm is installed and updated.
+    ansible.builtin.apt:
+      name: slurm-wlm
+      state: latest
+  - name: Upload previously configured Slurm configuration file.
+    ansible.builtin.copy:
+      src: ./slurm.config
+      dest: /etc/slurm-llnl/slurm.config
+      backup: yes
+  - name: Ensure Slurm service is enabled and running.
+    ansible.builtin.systemd:
+      state: restarted
+      enabled: yes
+      name: slurmd
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org3b78fc5">
+<h2 id="org3b78fc5">&ldquo;There&rsquo;s no way someone else hasn&rsquo;t done this already!&rdquo;</h2>
+<p>
+You&rsquo;d be correct.
+</p>
+
+<p>
+Thankfully, we have this cool thing called <b>roles.</b>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc9db1ab">
+<h2 id="orgc9db1ab">Roles are reusable</h2>
+<p>
+Can be reused across different plays. (i.e. many servers might need a database)
+</p>
+
+<p>
+What if we just shared these roles with others?
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org16ed7ba">
+<h2 id="org16ed7ba">Ansible Galaxy</h2>
+<p>
+&ldquo;Package manager&rdquo; for Ansible roles.
+</p>
+
+<p>
+You can probably Google &ldquo;[_] Ansible role&rdquo; and find what you want.
+</p>
+
+<p>
+<i>Surely</i> that doesn&rsquo;t always work&#x2026;
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org68f4a35">
+<h2 id="org68f4a35">It does</h2>
+<ul>
+<li>There&rsquo;s a role for Slurm.</li>
+<li>There&rsquo;s a role for Singularity.</li>
+<li>There&rsquo;s a role for Grafana.</li>
+<li>etc.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org01c6376">
+<h2 id="org01c6376">What&rsquo;s the difference?</h2>
+<p>
+Mostly syntax.
+</p>
+
+<p>
+You also require a <code>ansible-galaxy</code> download:
+</p>
+
+<p>
+<code>ansible-galaxy install -r requirements.yml</code>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orga31d647">
+<h2 id="orga31d647">Example Ansible Playbook</h2>
+<div class="org-src-container">
+
+<pre><code class="yaml" data-line-numbers='4-8'>- name: Setup Slurm nodes
+  hosts: slurm-nodes
+  remote_user: root
+  vars:
+    slurm_roles: ['controller', 'exec', 'dbd']
+  roles:
+    - role: galaxyproject.slurm
+      become: True
+  tasks:
+  - name: Upload previously configured Slurm configuration file.
+    ansible.builtin.copy:
+      src: ./slurm.config
+      dest: /etc/slurm-llnl/slurm.config
+      backup: yes
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf5d22a4">
+<h2 id="orgf5d22a4">How can this scale?</h2>
+<p>
+Quite well actually.
+</p>
+
+<p>
+<a href="https://github.com/acmucsd/tech-stack">I have a better example to show you.</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org99a7ecb">
+<h2 id="org99a7ecb">Are there any downsides?</h2>
+<p>
+A few.
+</p>
+
+<ul>
+<li class="fragment appear">Agentless, which means machine has to run it to keep things up to date.
+<ul>
+<li>Configuration drift can happen without running Ansible.</li>
+
+</ul></li>
+<li class="fragment appear">Needs SSH connection
+<ul>
+<li>More inconvenient in air-gapped situations (or bastion box environments)</li>
+
+</ul></li>
+<li class="fragment appear">Python support required on node
+<ul>
+<li>Extra dependency, but only during Ansible run</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd72aa05">
+<h2 id="orgd72aa05">Advanced concepts!</h2>
+<ul>
+<li class="fragment appear">Templating</li>
+<li class="fragment appear">Variables</li>
+<li class="fragment appear">register debug outputs</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd97fc79">
+<h2 id="orgd97fc79">Questions?</h2>
+</section>
+</section>
+</div>
+</div>
+<script src="/Users/ghost/.emacs.d/.local/straight/build-28.2/revealjs/dist/reveal.js"></script>
+<script src="/Users/ghost/.emacs.d/.local/straight/build-28.2/revealjs/plugin/highlight/highlight.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+overview: true,
+
+transition: 'convex',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealHighlight ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+#+title: Ansible Primer
+#+author: Matei-Alexandru Gardus
+#+options: toc:nil num:nil timestamp:nil
+#+REVEAL_PLUGINS: (highlight)
+#+REVEAL_HIGHLIGHT_CSS: atom-one-dark.css
+#+REVEAL_DEFAULT_FRAG_STYLE: appear
+
+* Welcome!
+
+Get a cup of coffee. ☕
+
+* TL;DR for today
+Quick demo of what Ansible does.
+
+Why use it?
+
+Why it's super cool.
+
+* What is Ansible?
+
+Configuration management tool.
+
+Automated control of server state.
+
+* Why?
+
+First we need to look at how applications are deployed in general.
+
+** The Basics
+#+ATTR_REVEAL: :frag (appear)
+There are different processes, but generally, applications are deployed via:
+
+#+ATTR_REVEAL: :frag (appear)
+- Package Managers (=apt=)
+- Source tarballs (uses =./configure; make; ...=)
+- Single binaries
+
+#+ATTR_REVEAL: :frag (appear)
+Either way, all these need to be run in shells, essentially.
+
+** Shell Scripts
+
+#+ATTR_REVEAL: :frag (appear)
+These are the /easiest/ (?) way to automate a server's configuration.
+
+#+ATTR_REVEAL: :frag (appear)
+Just rewrite the commands you ran when you first manually installed a software.
+
+#+ATTR_REVEAL: :frag (appear)
+Some software provides these out-of-the-box.
+
+** Is this good?
+
+#+ATTR_REVEAL: :frag (appear)
+Not really.
+
+#+ATTR_REVEAL: :frag (appear)
+- Scripts are hard to write.
+- They're imperative.
+- They're not idempotent (by default)
+- Not easily compoundable.
+
+** Doesn't mean they're bad.
+
+We just want to have an easier method to manage small snippets we can run to
+deploy software.
+
+* Ansible solves this!
+
+Made by Red Hat.
+
+Designed to be a sequence of small shell scripts run on the server, provided
+as Ansible *modules*.
+
+* How does Ansible work?
+
+Essentially, Ansible takes our input (YAML files) and constructs a set of tasks
+to run.
+
+This set of tasks is run on any nodes we want it to in order, and
+*declaratively* sets up our nodes.
+
+Nothing is run if everything is fine.
+
+** Ansible Structure
+
+/"We love Shakespare."/ - Red Hat, probably.
+
+#+ATTR_REVEAL: :frag (appear)
+- *Role:* Set of reusable Ansible files creating a particular configuration
+- *Playbook:* a composition of plays to properly configure an deployment
+- *Play:* a mapping between hosts and roles
+- *Inventory:* set of hosts to configure (doesn't fit, I guess?)
+
+** General Workflow
+
+#+ATTR_REVEAL: :frag (appear)
+- Pass in a YAML file (or folder of them) containing plays, roles, etc.
+- Set a inventory file to point to the servers you want to configure
+- =ansible-playbook -i inventory.file playbook.yml=
+
+** Terraform!
+
+#+ATTR_REVEAL: :frag (appear)
+- Terraform by HashiCorp is basically Ansible's best friend.
+- Both declarative!
+- Terraform provisions infrastructure hardware, Ansible deals with software.
+- Terraform works with cloud or bare-metal (with some effort).
+- Cool thing we're not gonna use, but nice to have fun with.
+
+* How can we use this?
+
+#+ATTR_REVEAL: :frag (appear)
+- Take all of our dependencies on our nodes
+- List roles that represent each software we need on each machine
+    - Or find them online 😉
+- Setup playbook for all our hosts
+
+* Examples!
+
+I'll show you a simple example of an Ansible playbook that installs Slurm on
+Ubuntu 20.04.
+
+#+begin_comment
+This is where you should put in a playbook that apt installs slurm and copies a local Slurm config file.
+#+end_comment
+
+* Example Ansible Playbook
+
+#+ATTR_REVEAL: :code_attribs data-line-numbers='1-3|5|6-9|10-14|15-19'
+#+begin_src yaml
+- name: Setup Slurm nodes
+  hosts: slurm-nodes
+  remote_user: root
+
+  tasks:
+  - name: Ensure Slurm is installed and updated.
+    ansible.builtin.apt:
+      name: slurm-wlm
+      state: latest
+  - name: Upload previously configured Slurm configuration file.
+    ansible.builtin.copy:
+      src: ./slurm.config
+      dest: /etc/slurm-llnl/slurm.config
+      backup: yes
+  - name: Ensure Slurm service is enabled and running.
+    ansible.builtin.systemd:
+      state: restarted
+      enabled: yes
+      name: slurmd
+#+end_src
+
+* "There's no way someone else hasn't done this already!"
+
+You'd be correct.
+
+Thankfully, we have this cool thing called *roles.*
+
+* Roles are reusable
+
+Can be reused across different plays. (i.e. many servers might need a database)
+
+What if we just shared these roles with others?
+
+* Ansible Galaxy
+
+"Package manager" for Ansible roles.
+
+You can probably Google "[_] Ansible role" and find what you want.
+
+/Surely/ that doesn't always work...
+
+* It does
+
+#+ATTR_REVEAL: :code_attribs data-line-numbers='1-3|5|6-9|10-14|15-19'
+- There's a role for Slurm.
+- There's a role for Singularity.
+- There's a role for Grafana.
+- etc.
+
+* What's the difference?
+
+Mostly syntax.
+
+You also require a =ansible-galaxy= download:
+
+=ansible-galaxy install -r requirements.yml=
+
+* Example Ansible Playbook
+
+#+ATTR_REVEAL: :code_attribs data-line-numbers='4-8'
+#+begin_src yaml
+- name: Setup Slurm nodes
+  hosts: slurm-nodes
+  remote_user: root
+  vars:
+    slurm_roles: ['controller', 'exec', 'dbd']
+  roles:
+    - role: galaxyproject.slurm
+      become: True
+  tasks:
+  - name: Upload previously configured Slurm configuration file.
+    ansible.builtin.copy:
+      src: ./slurm.config
+      dest: /etc/slurm-llnl/slurm.config
+      backup: yes
+#+end_src
+
+* How can this scale?
+
+Quite well actually.
+
+[[https://github.com/acmucsd/tech-stack][I have a better example to show you.]]
+
+* Are there any downsides?
+
+A few.
+
+#+ATTR_REVEAL: :frag (appear)
+- Agentless, which means machine has to run it to keep things up to date.
+  - Configuration drift can happen without running Ansible.
+- Needs SSH connection
+  - More inconvenient in air-gapped situations (or bastion box environments)
+- Python support required on node
+  - Extra dependency, but only during Ansible run
+
+* Advanced concepts!
+
+#+ATTR_REVEAL: :frag (appear)
+- Templating
+- Variables
+- register debug outputs
+
+* Questions?
