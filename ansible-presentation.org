@@ -4,6 +4,7 @@
 #+REVEAL_PLUGINS: (highlight)
 #+REVEAL_HIGHLIGHT_CSS: atom-one-dark.css
 #+REVEAL_DEFAULT_FRAG_STYLE: appear
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 
 * Welcome!
 
