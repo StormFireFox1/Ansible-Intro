@@ -20,8 +20,8 @@
 </section>
 
 <section>
-<section id="slide-org9dff359">
-<h2 id="org9dff359">Welcome!</h2>
+<section id="slide-orgbaba763">
+<h2 id="orgbaba763">Welcome!</h2>
 <p>
 Get a cup of coffee. ☕
 </p>
@@ -29,8 +29,8 @@ Get a cup of coffee. ☕
 </section>
 </section>
 <section>
-<section id="slide-orgf5b73cf">
-<h2 id="orgf5b73cf">TL;DR for today</h2>
+<section id="slide-orgedce6da">
+<h2 id="orgedce6da">TL;DR for today</h2>
 <p>
 Quick demo of what Ansible does.
 </p>
@@ -46,8 +46,8 @@ Why it&rsquo;s super cool.
 </section>
 </section>
 <section>
-<section id="slide-org77c69c5">
-<h2 id="org77c69c5">What is Ansible?</h2>
+<section id="slide-org983d09f">
+<h2 id="org983d09f">What is Ansible?</h2>
 <p>
 Configuration management tool.
 </p>
@@ -59,15 +59,15 @@ Automated control of server state.
 </section>
 </section>
 <section>
-<section id="slide-orgff94019">
-<h2 id="orgff94019">Why?</h2>
+<section id="slide-org02a3436">
+<h2 id="org02a3436">Why?</h2>
 <p>
 First we need to look at how applications are deployed in general.
 </p>
 
 </section>
-<section id="slide-org20d7e14">
-<h3 id="org20d7e14">The Basics</h3>
+<section id="slide-org0fef92f">
+<h3 id="org0fef92f">The Basics</h3>
 <p class="fragment (appear)">
 There are different processes, but generally, applications are deployed via:
 </p>
@@ -84,8 +84,8 @@ Either way, all these need to be run in shells, essentially.
 </p>
 
 </section>
-<section id="slide-org53dec8a">
-<h3 id="org53dec8a">Shell Scripts</h3>
+<section id="slide-orgcb55119">
+<h3 id="orgcb55119">Shell Scripts</h3>
 <p class="fragment (appear)">
 These are the <i>easiest</i> (?) way to automate a server&rsquo;s configuration.
 </p>
@@ -99,8 +99,8 @@ Some software provides these out-of-the-box.
 </p>
 
 </section>
-<section id="slide-org347be87">
-<h3 id="org347be87">Is this good?</h3>
+<section id="slide-orgaad6b6e">
+<h3 id="orgaad6b6e">Is this good?</h3>
 <p class="fragment (appear)">
 Not really.
 </p>
@@ -114,8 +114,8 @@ Not really.
 </ul>
 
 </section>
-<section id="slide-org862fb4b">
-<h3 id="org862fb4b">Doesn&rsquo;t mean they&rsquo;re bad.</h3>
+<section id="slide-orgba6b111">
+<h3 id="orgba6b111">Doesn&rsquo;t mean they&rsquo;re bad.</h3>
 <p>
 We just want to have an easier method to manage small snippets we can run to
 deploy software.
@@ -124,8 +124,8 @@ deploy software.
 </section>
 </section>
 <section>
-<section id="slide-org8eaa9ce">
-<h2 id="org8eaa9ce">Ansible solves this!</h2>
+<section id="slide-org748f889">
+<h2 id="org748f889">Ansible solves this!</h2>
 <p>
 Made by Red Hat.
 </p>
@@ -138,8 +138,8 @@ as Ansible <b>modules</b>.
 </section>
 </section>
 <section>
-<section id="slide-orgefcef49">
-<h2 id="orgefcef49">How does Ansible work?</h2>
+<section id="slide-org39aa2e5">
+<h2 id="org39aa2e5">How does Ansible work?</h2>
 <p>
 Essentially, Ansible takes our input (YAML files) and constructs a set of tasks
 to run.
@@ -155,8 +155,8 @@ Nothing is run if everything is fine.
 </p>
 
 </section>
-<section id="slide-org9c4ac4e">
-<h3 id="org9c4ac4e">Ansible Structure</h3>
+<section id="slide-org7a52b7e">
+<h3 id="org7a52b7e">Ansible Structure</h3>
 <p>
 <i>&ldquo;We love Shakespare.&rdquo;</i> - Red Hat, probably.
 </p>
@@ -170,8 +170,8 @@ Nothing is run if everything is fine.
 </ul>
 
 </section>
-<section id="slide-org23099c5">
-<h3 id="org23099c5">General Workflow</h3>
+<section id="slide-org10c4f05">
+<h3 id="org10c4f05">General Workflow</h3>
 <ul>
 <li class="fragment appear">Pass in a YAML file (or folder of them) containing plays, roles, etc.</li>
 <li class="fragment appear">Set a inventory file to point to the servers you want to configure</li>
@@ -180,8 +180,8 @@ Nothing is run if everything is fine.
 </ul>
 
 </section>
-<section id="slide-orgf700f74">
-<h3 id="orgf700f74">Terraform!</h3>
+<section id="slide-orgf12ba99">
+<h3 id="orgf12ba99">Terraform!</h3>
 <ul>
 <li class="fragment appear">Terraform by HashiCorp is basically Ansible&rsquo;s best friend.</li>
 <li class="fragment appear">Both declarative!</li>
@@ -194,8 +194,8 @@ Nothing is run if everything is fine.
 </section>
 </section>
 <section>
-<section id="slide-orgc560b17">
-<h2 id="orgc560b17">How can we use this?</h2>
+<section id="slide-org3c50dc5">
+<h2 id="org3c50dc5">How can we use this?</h2>
 <ul>
 <li class="fragment appear">Take all of our dependencies on our nodes</li>
 <li class="fragment appear">List roles that represent each software we need on each machine
@@ -210,8 +210,8 @@ Nothing is run if everything is fine.
 </section>
 </section>
 <section>
-<section id="slide-orgdc30ae9">
-<h2 id="orgdc30ae9">Examples!</h2>
+<section id="slide-orge297810">
+<h2 id="orge297810">Examples!</h2>
 <p>
 I&rsquo;ll show you a simple example of an Ansible playbook that installs Slurm on
 Ubuntu 20.04.
@@ -220,8 +220,8 @@ Ubuntu 20.04.
 </section>
 </section>
 <section>
-<section id="slide-org96e1945">
-<h2 id="org96e1945">Example Ansible Playbook</h2>
+<section id="slide-org56cbcf8">
+<h2 id="org56cbcf8">Example Ansible Playbook</h2>
 <div class="org-src-container">
 
 <pre><code class="yaml" data-line-numbers='1-3|5|6-9|10-14|15-19'>- name: Setup Slurm nodes
@@ -249,8 +249,8 @@ Ubuntu 20.04.
 </section>
 </section>
 <section>
-<section id="slide-orgb1d15f9">
-<h2 id="orgb1d15f9">&ldquo;There&rsquo;s no way someone else hasn&rsquo;t done this already!&rdquo;</h2>
+<section id="slide-org282b36d">
+<h2 id="org282b36d">&ldquo;There&rsquo;s no way someone else hasn&rsquo;t done this already!&rdquo;</h2>
 <p>
 You&rsquo;d be correct.
 </p>
@@ -262,8 +262,8 @@ Thankfully, we have this cool thing called <b>roles.</b>
 </section>
 </section>
 <section>
-<section id="slide-org57b9f57">
-<h2 id="org57b9f57">Roles are reusable</h2>
+<section id="slide-orga110316">
+<h2 id="orga110316">Roles are reusable</h2>
 <p>
 Can be reused across different plays. (i.e. many servers might need a database)
 </p>
@@ -275,8 +275,8 @@ What if we just shared these roles with others?
 </section>
 </section>
 <section>
-<section id="slide-org1453b13">
-<h2 id="org1453b13">Ansible Galaxy</h2>
+<section id="slide-org4547767">
+<h2 id="org4547767">Ansible Galaxy</h2>
 <p>
 &ldquo;Package manager&rdquo; for Ansible roles.
 </p>
@@ -292,8 +292,8 @@ You can probably Google &ldquo;[_] Ansible role&rdquo; and find what you want.
 </section>
 </section>
 <section>
-<section id="slide-orge2a726a">
-<h2 id="orge2a726a">It does</h2>
+<section id="slide-org2c7ae0e">
+<h2 id="org2c7ae0e">It does</h2>
 <ul>
 <li>There&rsquo;s a role for Slurm.</li>
 <li>There&rsquo;s a role for Singularity.</li>
@@ -305,8 +305,8 @@ You can probably Google &ldquo;[_] Ansible role&rdquo; and find what you want.
 </section>
 </section>
 <section>
-<section id="slide-org7986c3b">
-<h2 id="org7986c3b">What&rsquo;s the difference?</h2>
+<section id="slide-org471bb89">
+<h2 id="org471bb89">What&rsquo;s the difference?</h2>
 <p>
 Mostly syntax.
 </p>
@@ -322,8 +322,8 @@ You also require a <code>ansible-galaxy</code> download:
 </section>
 </section>
 <section>
-<section id="slide-org12418b2">
-<h2 id="org12418b2">Example Ansible Playbook</h2>
+<section id="slide-org71dcf09">
+<h2 id="org71dcf09">Example Ansible Playbook</h2>
 <div class="org-src-container">
 
 <pre><code class="yaml" data-line-numbers='4-8'>- name: Setup Slurm nodes
@@ -346,8 +346,8 @@ You also require a <code>ansible-galaxy</code> download:
 </section>
 </section>
 <section>
-<section id="slide-org8802a78">
-<h2 id="org8802a78">How can this scale?</h2>
+<section id="slide-orgfe51740">
+<h2 id="orgfe51740">How can this scale?</h2>
 <p>
 Quite well actually.
 </p>
@@ -359,8 +359,8 @@ Quite well actually.
 </section>
 </section>
 <section>
-<section id="slide-org6256c10">
-<h2 id="org6256c10">Are there any downsides?</h2>
+<section id="slide-org5c8afe1">
+<h2 id="org5c8afe1">Are there any downsides?</h2>
 <p>
 A few.
 </p>
@@ -387,8 +387,47 @@ A few.
 </section>
 </section>
 <section>
-<section id="slide-orge5a63a1">
-<h2 id="orge5a63a1">Advanced concepts!</h2>
+<section id="slide-org386139b">
+<h2 id="org386139b">The worst downside</h2>
+<p class="fragment (appear)">
+In my opinion.
+</p>
+
+<p class="fragment (appear)">
+YAML is a poor file format for configuration.
+</p>
+
+</section>
+<section id="slide-org6e0eea8">
+<h3 id="org6e0eea8">Indentation</h3>
+<p class="fragment (appear)">
+Should not be necessary in a configuration file.
+</p>
+
+<p class="fragment (appear)">
+Machine-friendly configuration is nicer for automation.
+</p>
+
+</section>
+<section id="slide-orgf9a20cc">
+<h3 id="orgf9a20cc">Array? Map?</h3>
+<p>
+<b>You will never know.</b>
+</p>
+
+<p>
+Many, many edgecases.
+</p>
+
+<p>
+<a href="https://noyaml.com">More details at this wonderful YAML file.</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org6c835dc">
+<h2 id="org6c835dc">Advanced concepts!</h2>
 <ul>
 <li class="fragment appear">Templating</li>
 <li class="fragment appear">Variables</li>
@@ -399,8 +438,8 @@ A few.
 </section>
 </section>
 <section>
-<section id="slide-org9e9ce16">
-<h2 id="org9e9ce16">Questions?</h2>
+<section id="slide-org8aa33c5">
+<h2 id="org8aa33c5">Questions?</h2>
 </section>
 </section>
 </div>

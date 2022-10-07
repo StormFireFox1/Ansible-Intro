@@ -225,6 +225,33 @@ A few.
 - Python support required on node
   - Extra dependency, but only during Ansible run
 
+* The worst downside
+
+#+ATTR_REVEAL: :frag (appear)
+In my opinion.
+
+#+ATTR_REVEAL: :frag (appear)
+YAML is a poor file format for configuration.
+
+** Indentation
+
+#+ATTR_REVEAL: :frag (appear)
+Should not be necessary in a configuration file.
+
+#+ATTR_REVEAL: :frag (appear)
+Machine-friendly configuration is nicer for automation.
+
+** Array? Map?
+
+#+ATTR_REVEAL: :frag (appear)
+*You will never know.*
+
+#+ATTR_REVEAL: :frag (appear)
+Many, many edgecases.
+
+#+ATTR_REVEAL: :frag (appear)
+[[https://noyaml.com][More details at this wonderful YAML file.]]
+
 * Advanced concepts!
 
 #+ATTR_REVEAL: :frag (appear)
